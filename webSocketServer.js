@@ -1,5 +1,5 @@
 //This section is added as per instructions on heroku
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
 
 const express = require('express');
