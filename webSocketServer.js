@@ -1,15 +1,20 @@
+//This section is added as per instructions on heroku
+const PORT = process.env.PORT || 8082;
+const INDEX = '/index.html';
+
+const express = require('express');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
 //web socket on server side
-const WebSocket = require("ws");
-let assignedPort = process.env.PORT || 8082;
-assignedPort = parseInt(assignedPort);
-const wss = new WebSocket.Server({ port: assignedPort })
+const { Server } = require('ws');
+const wss = new Server({ server });
+//---
 
 //create a clientArray
 let Clients = [];
-do {
-    if (assignedPort != undefined)
-        alert(`Port number is ${assignedPort}`);
-} while (assignedPort === undefined)
 
 wss.on("connection", ws => {
     Clients.push(ws);

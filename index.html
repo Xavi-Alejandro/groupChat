@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+        let HOST = location.origin.replace(/^http/, 'ws')
+        const ws = new WebSocket(HOST);
+        
+        ws.addEventListener("open", function(){
+            console.log("We are connected");
+        })
+
+        ws.addEventListener("message", function ({data}) {
+            console.log("This is the message we sent that got sent back: "+data);
+            let spanElement = document.createElement("SPAN");
+            let br = document.createElement("BR");
+
+            //insert message data into spanElement
+            spanElement.innerHTML = data;
+
+            //append <br> so it looks better
+            spanElement.appendChild(br);
+
+            //attach message span to the chat window
+            let chatWindow = document.getElementById("chatWindow")
+            chatWindow.appendChild(spanElement);
+        })
+        function sendMessage() {
+            ws.send(document.getElementById("text-box").value);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="chatWindow">
+        <!--Add Css later-->
+
+    </div>
+        <span>Type message here : </span>
+        <input id="text-box" type="text" name="userMessage"></input>
+        <button onclick="sendMessage()">Send</button>
+</body>
+
+
+</html>
