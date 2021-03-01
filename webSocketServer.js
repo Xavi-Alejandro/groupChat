@@ -1,10 +1,15 @@
 //web socket on server side
 const WebSocket = require("ws");
-const assignedPort = process.env.PORT || 8082;
+let assignedPort = process.env.PORT || 8082;
+assignedPort = parseInt(assignedPort);
 const wss = new WebSocket.Server({ port: assignedPort })
 
 //create a clientArray
 let Clients = [];
+do {
+    if (assignedPort != undefined)
+        alert(`Port number is ${assignedPort}`);
+} while (assignedPort === undefined)
 
 wss.on("connection", ws => {
     Clients.push(ws);
@@ -15,9 +20,9 @@ wss.on("connection", ws => {
     })
 
     ws.on("message", (message) => {
-        console.log("This is the message we received: "+ message);
-        for(let i = 0;i<Clients.length;i++){
+        console.log("This is the message we received: " + message);
+        for (let i = 0; i < Clients.length; i++) {
             Clients[i].send(message);
-        }        
+        }
     })
 })
