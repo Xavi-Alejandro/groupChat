@@ -5,29 +5,25 @@ const INDEX = '/index.html';
 const express = require('express');
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+    .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 //web socket on server side
-const { Server } = require('ws');
-const wss = new Server({ server });
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ server });
 //---
 
-//create a clientArray
-let Clients = [];
-
 wss.on("connection", ws => {
-    Clients.push(ws);
-    console.log("A client has connected to wss");
-
-    ws.on("close", () => {
-        console.log("client has disconnected");
-    })
-
+    //GOLD!!!
     ws.on("message", (message) => {
-        console.log("This is the message we received: " + message);
-        for (let i = 0; i < Clients.length; i++) {
-            Clients[i].send(message);
-        }
+        // console.log("This is the message we received: " + message);
+        wss.clients.forEach(function relayMessage(client){
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+            else{
+                client.send("!MyMessage"+message);
+            }
+        })
     })
 })
