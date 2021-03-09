@@ -100,7 +100,7 @@
         function sendMessage() {
             //send message and clear value
             messageHolder = document.getElementById("text-box").value;
-            if (inputIsEmpty() === false) {
+            if (inputIsEmpty() === false && messageHolder.trim().length) {
                 if (messageHolder.substring(0, 12) === "!SetNickname") {
                     nickname = messageHolder.replace("!SetNickname", "");
                     console.log(nickname);
