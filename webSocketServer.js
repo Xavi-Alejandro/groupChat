@@ -14,6 +14,7 @@ const wss = new WebSocket.Server({ server });
 //---
 
 wss.on("connection", ws => {
+    ws.send(`Welcome new user, type in "!SetNickname[Your nickname]" to give yourself a nickname`)
     //GOLD!!!
     ws.on("message", (message) => {
         // console.log("This is the message we received: " + message);
