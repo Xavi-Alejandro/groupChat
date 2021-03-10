@@ -1,0 +1,28 @@
+#chatWindow {
+    margin-top: 30px;
+    height: 400px;
+    border: 1px solid black;
+    overflow: auto;
+    word-wrap: break-word;
+    position: relative;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    /*This allows for scrolling*/
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.messages {
+    margin-top: 5px;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+#message {
+    background-color: black;
+    padding: 30px;
+    color: white;
+}
