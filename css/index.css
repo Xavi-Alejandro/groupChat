@@ -1,8 +1,0 @@
-#chatWindow {
-    height: 500px;
-    width: 500px;
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: auto; /*This allows for scrolling*/
-}
