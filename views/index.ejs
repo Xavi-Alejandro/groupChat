@@ -33,9 +33,8 @@
         var socket = io();
         $('form').submit(function () {
             var msg = $('#message').val();
-
             console.log('msg', msg)
-            if (msg.trim().length > 0)
+            if (msg.trim())
                 socket.emit('chatter', msg);
             else
                 alert("Enter a valid msg >:(");
